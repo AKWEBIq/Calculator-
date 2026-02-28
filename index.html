@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern Calculator</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:40px;
+    background:linear-gradient(135deg,#6a0dad,#a020f0);
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+/* Calculator Card */
+.calculator{
+    width:280px;
+    padding:20px;
+    border-radius:30px;
+    box-shadow:0 30px 60px rgba(0,0,0,0.4);
+    background:white;
+}
+
+/* Dark Version */
+.dark{
+    background:#2b2b2b;
+    color:white;
+}
+
+/* Screen */
+.screen{
+    height:80px;
+    border-radius:20px;
+    padding:15px;
+    font-size:28px;
+    text-align:right;
+    margin-bottom:20px;
+    background:linear-gradient(135deg,#ff9ad5,#c471ed);
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    font-weight:bold;
+}
+
+/* Dark screen */
+.dark .screen{
+    background:#1c1c1c;
+}
+
+/* Buttons Grid */
+.buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+/* Buttons */
+button{
+    height:55px;
+    border:none;
+    border-radius:15px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    background:#f2f2f2;
+    transition:0.2s;
+}
+
+/* Dark buttons */
+.dark button{
+    background:#3a3a3a;
+    color:white;
+}
+
+/* Hover */
+button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 6px 12px rgba(0,0,0,0.2);
+}
+
+/* Equal Button */
+.equal{
+    background:#a020f0;
+    color:white;
+    grid-row: span 2;
+}
+
+.dark .equal{
+    background:#444;
+}
+
+/* Zero Button */
+.zero{
+    grid-column: span 2;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Pink Version -->
+<div class="calculator">
+    <div class="screen" id="screen1">0</div>
+    <div class="buttons">
+        <button onclick="clearScreen('screen1')">C</button>
+        <button onclick="append('screen1','/')">÷</button>
+        <button onclick="append('screen1','*')">×</button>
+        <button onclick="append('screen1','-')">-</button>
+
+        <button onclick="append('screen1','7')">7</button>
+        <button onclick="append('screen1','8')">8</button>
+        <button onclick="append('screen1','9')">9</button>
+        <button onclick="append('screen1','+')">+</button>
+
+        <button onclick="append('screen1','4')">4</button>
+        <button onclick="append('screen1','5')">5</button>
+        <button onclick="append('screen1','6')">6</button>
+        <button class="equal" onclick="calculate('screen1')">=</button>
+
+        <button onclick="append('screen1','1')">1</button>
+        <button onclick="append('screen1','2')">2</button>
+        <button onclick="append('screen1','3')">3</button>
+
+        <button class="zero" onclick="append('screen1','0')">0</button>
+        <button onclick="append('screen1','.')">.</button>
+    </div>
+</div>
+
+<!-- Dark Version -->
+<div class="calculator dark">
+    <div class="screen" id="screen2">0</div>
+    <div class="buttons">
+        <button onclick="clearScreen('screen2')">C</button>
+        <button onclick="append('screen2','/')">÷</button>
+        <button onclick="append('screen2','*')">×</button>
+        <button onclick="append('screen2','-')">-</button>
+
+        <button onclick="append('screen2','7')">7</button>
+        <button onclick="append('screen2','8')">8</button>
+        <button onclick="append('screen2','9')">9</button>
+        <button onclick="append('screen2','+')">+</button>
+
+        <button onclick="append('screen2','4')">4</button>
+        <button onclick="append('screen2','5')">5</button>
+        <button onclick="append('screen2','6')">6</button>
+        <button class="equal" onclick="calculate('screen2')">=</button>
+
+        <button onclick="append('screen2','1')">1</button>
+        <button onclick="append('screen2','2')">2</button>
+        <button onclick="append('screen2','3')">3</button>
+
+        <button class="zero" onclick="append('screen2','0')">0</button>
+        <button onclick="append('screen2','.')">.</button>
+    </div>
+</div>
+
+<script>
+function append(id,value){
+    let screen=document.getElementById(id);
+    if(screen.innerText==="0") screen.innerText=value;
+    else screen.innerText+=value;
+}
+
+function clearScreen(id){
+    document.getElementById(id).innerText="0";
+}
+
+function calculate(id){
+    let screen=document.getElementById(id);
+    try{
+        screen.innerText=eval(screen.innerText);
+    }catch{
+        screen.innerText="Error";
+    }
+}
+</script>
+
+</body>
+</html>
